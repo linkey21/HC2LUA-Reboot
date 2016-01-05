@@ -15,6 +15,11 @@ while true do
   response ,status, errorCode = HC2:GET("/api/diagnostics")
   local memoryFree = json.decode(response)['memory'].free
   local memoryMin = tonumber(string.sub(fibaro:get(_selfId, "ui.memoryLabel.value"), 7, 8))
+  -- si aún no se a inicializado
+  if not memoryMin then
+    -- escribir la etiqueta inicial
+    fibaro:call(_selfId, "setProperty", "ui.memoryLabel.value", memoryFree..'% / 10%')
+  end
     -- comprobar si la memoria está por debajo de ma memoria mínima
   if memoryFree < memoryMin then
     --si se ha definido un dispositivo para push, enviar mensaje
