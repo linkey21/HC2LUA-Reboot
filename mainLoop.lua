@@ -5,6 +5,7 @@
 ------------------------------------------------------------------------------]]
 
 --[[----- CONFIGURACION AVANZADA ---------------------------------------------]]
+local release = {name='rebootVD', ver=1, mayor=1, minor=0}
 local _selfId = fibaro:getSelfId()  -- ID de este dispositivo virtual
 --[[----- FIN CONFIGURACION AVANZADA -----------------------------------------]]
 
@@ -39,4 +40,6 @@ while true do
     memoryFree..'% / '..memoryMin..'%')
   fibaro:sleep(2000)
   fibaro:log('')
+  -- para control por whatchdog
+  fibaro:debug(release['name']..' OK')
 end
